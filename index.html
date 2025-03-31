@@ -7,10 +7,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="settings-panel">
+        <h2>Settings</h2>
+        <div>
+            <label for="background-upload">Change Background:</label>
+            <input type="file" id="background-upload" accept="image/*">
+        </div>
+        <div>
+            <label for="name1">Name 1:</label>
+            <input type="text" id="name1" value="Rakk">
+        </div>
+        <div>
+            <label for="name2">Name 2:</label>
+            <input type="text" id="name2" value="Roth">
+        </div>
+        <div>
+            <label for="profile-upload1">Profile Picture 1:</label>
+            <input type="file" id="profile-upload1" accept="image/*">
+        </div>
+        <div>
+            <label for="profile-upload2">Profile Picture 2:</label>
+            <input type="file" id="profile-upload2" accept="image/*">
+        </div>
+        <div>
+            <label for="audio-select">Background Music:</label>
+            <select id="audio-select">
+                <option value="song1.mp3">Song 1</option>
+                <option value="song2.mp3">Song 2</option>
+            </select>
+        </div>
+        <button id="save-settings">Save Settings</button>
+    </div>
+
     <div class="countdown-container">
         <div class="couple-names">
-            <h2>Rakk & Roth</h2>
-            <p>getting relationship on 17 March 2020, tbong khmum province</p>
+            <h2 id="couple-name1">Rakk</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" style="color: #e91e63;">
+                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+            </svg>
+            <h2 id="couple-name2">Roth</h2>
+        </div>
+        <div class="time-segment">
+            <span id="total-days">0</span>
+            <span>Total Days</span>
+        </div>
+        <div class="profile-pictures">
+            <img id="profile-pic1" src="placeholder.png" alt="Profile 1" >
+            <img id="profile-pic2" src="placeholder.png" alt="Profile 2">
         </div>
         <div class="countdown-timer">
             <div class="time-segment">
@@ -20,6 +63,10 @@
             <div class="time-segment">
                 <span id="months">0</span>
                 <span>Months</span>
+            </div>
+            <div class="time-segment">
+                <span id="weeks">0</span>
+                <span>Weeks</span>
             </div>
             <div class="time-segment">
                 <span id="days">0</span>
@@ -38,14 +85,16 @@
                 <span>Seconds</span>
             </div>
         </div>
+        <div class="navigation">
+            <button id="home-btn">Home</button>
+            <button id="settings-btn">Settings</button>
+        </div>
     </div>
 
-    <audio id="backgroundAudio" autoplay loop>
-        <source src="https://pouch.jumpshare.com/preview/t3S6vTSfYOVI0W5cfLeB00PAZWU8p72zSQfW0vKKTzFB0ZbZgrB0LbvdICK8z0dQZILC-RE2MEIekBDN4YUImIW_mDHQmLEQOIBnGifuYDU2nBZbmaEgyyz1qlB21XMGKgjopc-Xnqpz6gOHtTLKaW6yjbN-I2pg_cnoHs_AmgI.mp3" type="audio/mpeg">
-        </source>
+    <audio id="backgroundAudio" loop>
+        <source id="audio-source" src="https://pouch.jumpshare.com/preview/t3S6vTSfYOVI0W5cfLeB00PAZWU8p72zSQfW0vKKTzFB0ZbZgrB0LbvdICK8z0dQZILC-RE2MEIekBDN4YUImIW_mDHQmLEQOIBnGifuYDU2nBZbmaEgyyz1qlB21XMGS4mBqs7R4LTyySVDr83btW6yjbN-I2pg_cnoHs_AmgI.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
     <script src="style.js"></script>
 </body>
 </html>
