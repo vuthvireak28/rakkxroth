@@ -339,3 +339,85 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+function checkLocalStorageSize() {
+  let totalSize = 0;
+  for (let key in localStorage) {
+    if (localStorage.hasOwnProperty(key)) {
+      let value = localStorage.getItem(key);
+      // Assuming each character is roughly 2 bytes (for UTF-16 encoding)
+      totalSize += value.length * 2;
+    }
+  }
+  // Convert bytes to megabytes
+  const sizeInMB = (totalSize / (1024 * 1024)).toFixed(2);
+  console.log(`Local Storage Size: ${sizeInMB} MB`);
+  return sizeInMB;
+}
+
+// You can call this function at different points in your script, for example:
+
+// Call it when settings are saved
+if (saveSettingsBtn) {
+  saveSettingsBtn.addEventListener('click', function() {
+    name1Element.textContent = nameInput1.value;
+    name2Element.textContent = nameInput2.value;
+    saveSettings();
+    alert('Settings Saved!');
+    settingsPanel.style.display = 'none';
+    countdownContainer.style.display = 'block';
+    checkLocalStorageSize(); // Call the function after saving
+  });
+}
+
+// You can also call it when the page loads to see the initial size
+document.addEventListener('DOMContentLoaded', function() {
+  // ... (your existing DOMContentLoaded code) ...
+  loadSettings();
+  checkLocalStorageSize(); // Call the function on load
+  // ... (rest of your DOMContentLoaded code) ...
+});
+
+// Or after any operation that might significantly change local storage, like uploading a background
+if (backgroundUpload) {
+  backgroundUpload.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.body.style.backgroundImage = `url('${e.target.result}')`;
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundRepeat = 'no-repeat';
+        localStorage.setItem('background', e.target.result);
+        checkLocalStorageSize(); // Call the function after saving the background
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+// Similarly for profile picture uploads
+if (profileUpload1) {
+  profileUpload1.addEventListener('change', function() {
+    // ... (your existing code) ...
+    localStorage.setItem('profilePic1', e.target.result);
+    checkLocalStorageSize(); // Call the function after saving profile pic 1
+    // ...
+  });
+}
+
+if (profileUpload2) {
+  profileUpload2.addEventListener('change', function() {
+    // ... (your existing code) ...
+    localStorage.setItem('profilePic2', e.target.result);
+    checkLocalStorageSize(); // Call the function after saving profile pic 2
+    // ...
+  });
+}
+
+// And when audio is selected
+audioSelect.addEventListener('change', function() {
+  // ... (your existing code) ...
+  localStorage.setItem('audio', selectedSong);
+  checkLocalStorageSize(); // Call the function after saving audio
+});
