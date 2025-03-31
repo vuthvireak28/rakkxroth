@@ -215,3 +215,127 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // ... (rest of your variable declarations) ...
+
+    // --- Click Sound ---
+    const clickSound = new Audio('click.mp3');
+
+    // --- Load Settings from Local Storage ---
+    function loadSettings() {
+        // ... (your loadSettings function remains the same) ...
+    }
+
+    // --- Save Settings to Local Storage ---
+    function saveSettings() {
+        localStorage.setItem('background', document.body.style.backgroundImage.slice(5, -2));
+        localStorage.setItem('name1', nameInput1.value);
+        localStorage.setItem('name2', nameInput2.value);
+        localStorage.setItem('profilePic1', profilePic1Element.src);
+        localStorage.setItem('profilePic2', profilePic2Element.src);
+        localStorage.setItem('audio', audioSelect.value);
+    }
+
+    // --- Time Elapsed Calculation ---
+    function updateTimeElapsed() {
+        // ... (your time calculation code remains the same) ...
+    }
+
+    updateTimeElapsed();
+    setInterval(updateTimeElapsed, 1000);
+
+    // --- Audio Selection ---
+    audioSelect.addEventListener('change', function() {
+        clickSound.play();
+        const selectedSong = this.value;
+        audioSource.src = selectedSong;
+        backgroundAudio.load();
+        backgroundAudio.play().catch(error => {
+            console.log('Autoplay prevented or error:', error);
+        });
+        localStorage.setItem('audio', selectedSong); // Save audio immediately
+    });
+
+    // --- Settings Panel Visibility ---
+    if (settingsBtn) {
+        settingsBtn.addEventListener('click', function() {
+            settingsPanel.style.display = 'block';
+            countdownContainer.style.display = 'none';
+        });
+    }
+
+    if (homeBtn) {
+        homeBtn.addEventListener('click', function() {
+            settingsPanel.style.display = 'none';
+            countdownContainer.style.display = 'block';
+        });
+    }
+
+    // --- Save Settings Functionality ---
+    if (saveSettingsBtn) {
+        saveSettingsBtn.addEventListener('click', function() {
+            name1Element.textContent = nameInput1.value;
+            name2Element.textContent = nameInput2.value;
+            saveSettings(); // Ensure all settings are saved here
+            alert('Settings Saved!');
+            settingsPanel.style.display = 'none';
+            countdownContainer.style.display = 'block';
+        });
+    }
+
+    // --- Background Image Change ---
+    if (backgroundUpload) {
+        backgroundUpload.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url('${e.target.result}')`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundRepeat = 'no-repeat';
+                    localStorage.setItem('background', e.target.result); // Save background immediately
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // --- Profile Picture Change (for profile 1) ---
+    if (profileUpload1) {
+        profileUpload1.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic1Element.src = e.target.result;
+                    localStorage.setItem('profilePic1', e.target.result); // Save immediately
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // --- Profile Picture Change (for profile 2) ---
+    if (profileUpload2) {
+        profileUpload2.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic2Element.src = e.target.result;
+                    localStorage.setItem('profilePic2', e.target.result); // Save immediately
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // --- Attempt to play background music on load ---
+    if (backgroundAudio) {
+        loadSettings();
+        backgroundAudio.play().catch(error => {
+            console.log('Autoplay prevented:', error);
+        });
+    }
+});
