@@ -1,7 +1,6 @@
 body {
     font-family: sans-serif;
     margin: 0;
-    background-color: #f4f4f4;
     background-image: url(https://thumbs2.imgbox.com/f7/2c/sVBzkrdS_t.png);
     display: flex;
     justify-content: center;
@@ -56,4 +55,162 @@ body {
 
 .time-segment span:last-child {
     font-size: 0.7em; /* Reduced font size */
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f4f45b; /* Light grey background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.countdown-container {
+    background-color: rgba(255, 255, 255, 0.237); /* Semi-transparent white container */
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px; /* Adjust as needed */
+}
+
+.couple-names {
+    margin-bottom: 20px;
+}
+
+.couple-names h2 {
+    font-size: 2.5em;
+    color: #e91e63; /* Pink color */
+    margin: 5px 0;
+}
+
+.couple-names p {
+    font-size: 1em;
+    color: #555;
+    margin: 5px 0;
+}
+
+.profile-pictures {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.profile-pictures img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-timer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.time-segment {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.time-segment span:first-child {
+    font-size: 1.8em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.time-segment span:last-child {
+    font-size: 0.8em;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.navigation button {
+    background-color: #e91e63; /* Pink color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.navigation button:hover {
+    background-color: #d4145a;
+}
+
+/* Settings Panel Styles */
+.settings-panel {
+    display: none; /* Hidden by default */
+    background-color: rgba(255, 255, 255, 0.253);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: left;
+    width: 90%;
+    max-width: 400px;
+}
+
+.settings-panel h2 {
+    color: #e91e63; /* Pink color */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.settings-panel div {
+    margin-bottom: 15px;
+}
+
+.settings-panel label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.settings-panel input[type="text"],
+.settings-panel input[type="file"],
+.settings-panel select {
+    width: calc(100% - 12px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.settings-panel button {
+    background-color: #007bff; /* Blue color for save */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.settings-panel button:hover {
+    background-color: #0056b3;
 }
