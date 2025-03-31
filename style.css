@@ -1,0 +1,59 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    background-image: url(https://thumbs2.imgbox.com/f7/2c/sVBzkrdS_t.png);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.countdown-container {
+    background-color: #ffffff46;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.couple-names h2 {
+    font-size: 2.5em;
+    color: #e91e63; /* Pink color similar to the image */
+    margin-bottom: 10px;
+}
+
+.couple-names p {
+    font-size: 1em;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 10px; /* Reduced gap to accommodate the extra segment */
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.time-segment {
+    background-color: #e91e63; /* Pink background for numbers */
+    color: white;
+    padding: 15px 10px; /* Reduced padding */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px; /* Reduced min-width */
+}
+
+.time-segment span:first-child {
+    font-size: 1.5em; /* Reduced font size */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.time-segment span:last-child {
+    font-size: 0.7em; /* Reduced font size */
+}
