@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const settingsBtn = document.getElementById('settings-btn');
     const homeBtn = document.getElementById('home-btn'); // Assuming you want to toggle visibility
 
+    // --- Click Sound ---
+    const clickSound = new Audio('click.mp3'); // Replace 'click.mp3' with your sound file path
+
     // --- Time Elapsed Calculation ---
     function updateTimeElapsed() {
         const now = new Date();
@@ -71,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Audio Selection ---
     audioSelect.addEventListener('change', function() {
+        clickSound.play(); // Play the click sound
         const selectedSong = this.value;
         audioSource.src = selectedSong;
         backgroundAudio.load(); // Important to load the new source
