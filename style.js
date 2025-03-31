@@ -29,6 +29,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Click Sound ---
     const clickSound = new Audio('click.mp3'); // Replace 'click.mp3' with your sound file path
 
+    // --- Load Settings from Local Storage ---
+    function loadSettings() {
+        const savedBackground = localStorage.getItem('background');
+        const savedName1 = localStorage.getItem('name1');
+        const savedName2 = localStorage.getItem('name2');
+        const savedProfilePic1 = localStorage.getItem('profilePic1');
+        const savedProfilePic2 = localStorage.getItem('profilePic2');
+        const savedAudio = localStorage.getItem('audio');
+
+        if (savedBackground) {
+            document.body.style.backgroundImage = `url('${savedBackground}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundRepeat = 'no-repeat';
+        }
+        if (savedName1) {
+            name1Element.textContent = savedName1;
+            nameInput1.value = savedName1;
+        }
+        if (savedName2) {
+            name2Element.textContent = savedName2;
+            nameInput2.value = savedName2;
+        }
+        if (savedProfilePic1) {
+            profilePic1Element.src = savedProfilePic1;
+        }
+        if (savedProfilePic2) {
+            profilePic2Element.src = savedProfilePic2;
+        }
+        if (savedAudio) {
+            audioSource.src = savedAudio;
+            backgroundAudio.load();
+            backgroundAudio.play().catch(error => {
+                console.log('Autoplay prevented or error:', error);
+            });
+            audioSelect.value = savedAudio; // Ensure the dropdown reflects the saved choice
+        }
+    }
+
+    // --- Save Settings to Local Storage ---
+    function saveSettings() {
+        localStorage.setItem('background', document.body.style.backgroundImage.slice(5, -2)); // Extract URL
+        localStorage.setItem('name1', nameInput1.value);
+        localStorage.setItem('name2', nameInput2.value);
+        localStorage.setItem('profilePic1', profilePic1Element.src);
+        localStorage.setItem('profilePic2', profilePic2Element.src);
+        localStorage.setItem('audio', audioSelect.value);
+    }
+
     // --- Time Elapsed Calculation ---
     function updateTimeElapsed() {
         const now = new Date();
@@ -46,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // ... (rest of your time calculation code remains the same) ...
         const totalSeconds = Math.floor(timeDifference / 1000);
         const totalMinutes = Math.floor(totalSeconds / 60);
         const totalHours = Math.floor(totalMinutes / 60);
@@ -81,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         backgroundAudio.play().catch(error => {
             console.log('Autoplay prevented or error:', error);
         });
+        localStorage.setItem('audio', selectedSong); // Save audio selection immediately
     });
 
     // --- Settings Panel Visibility ---
@@ -98,19 +148,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- Save Settings Functionality (Basic Example) ---
+    // --- Save Settings Functionality ---
     if (saveSettingsBtn) {
         saveSettingsBtn.addEventListener('click', function() {
             name1Element.textContent = nameInput1.value;
             name2Element.textContent = nameInput2.value;
-            // Implement logic to handle background image and profile picture changes
-            alert('Settings Saved (Basic Implementation)');
+            saveSettings(); // Save all settings to local storage
+            alert('Settings Saved!');
             settingsPanel.style.display = 'none';
             countdownContainer.style.display = 'block';
         });
     }
 
-    // --- Background Image Change (Basic Example) ---
+    // --- Background Image Change ---
     if (backgroundUpload) {
         backgroundUpload.addEventListener('change', function() {
             const file = this.files[0];
@@ -120,13 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.body.style.backgroundImage = `url('${e.target.result}')`;
                     document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundRepeat = 'no-repeat';
+                    localStorage.setItem('background', e.target.result); // Save background immediately
                 }
                 reader.readAsDataURL(file);
             }
         });
     }
 
-    // --- Profile Picture Change (Basic Example - for profile 1) ---
+    // --- Profile Picture Change (for profile 1) ---
     if (profileUpload1) {
         profileUpload1.addEventListener('change', function() {
             const file = this.files[0];
@@ -134,13 +185,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePic1Element.src = e.target.result;
+                    localStorage.setItem('profilePic1', e.target.result); // Save profile pic 1 immediately
                 }
                 reader.readAsDataURL(file);
             }
         });
     }
 
-    // --- Profile Picture Change (Basic Example - for profile 2) ---
+    // --- Profile Picture Change (for profile 2) ---
     if (profileUpload2) {
         profileUpload2.addEventListener('change', function() {
             const file = this.files[0];
@@ -148,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePic2Element.src = e.target.result;
+                    localStorage.setItem('profilePic2', e.target.result); // Save profile pic 2 immediately
                 }
                 reader.readAsDataURL(file);
             }
@@ -156,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Attempt to play background music on load ---
     if (backgroundAudio) {
+        loadSettings(); // Load settings when the page loads
         backgroundAudio.play().catch(error => {
             console.log('Autoplay prevented:', error);
         });
